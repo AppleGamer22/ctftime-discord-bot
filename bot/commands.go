@@ -12,6 +12,7 @@ var TeamCommand = &discordgo.ApplicationCommand{
 		{
 			Name:        "id",
 			Description: "CTFTime team ID",
+			Required:    true,
 			Type:        discordgo.ApplicationCommandOptionString,
 			Choices: []*discordgo.ApplicationCommandOptionChoice{
 				{
@@ -19,21 +20,11 @@ var TeamCommand = &discordgo.ApplicationCommand{
 					Value: "34111",
 				},
 				{
-					Name:  "MISC",
-					Value: "34111", //109523
+					Name: "MISC",
+					// Value: "34111",
+					Value: "109523",
 				},
 			},
 		},
 	},
-}
-
-func TeamCommandHandler(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
-	if interaction.Type != discordgo.InteractionApplicationCommand {
-		return
-	}
-	data := interaction.ApplicationCommandData()
-	option := data.Options[0]
-	if option.Name != TeamCommand.Options[0].Name {
-
-	}
 }

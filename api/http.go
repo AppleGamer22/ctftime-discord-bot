@@ -21,10 +21,10 @@ func GETRequest(url string) ([]byte, error) {
 	return io.ReadAll(response.Body)
 }
 
-func UpcomingEvents(limit *uint) ([]Event, error) {
+func UpcomingEvents(limit *string) ([]Event, error) {
 	url := func() string {
 		if limit != nil {
-			return fmt.Sprintf("https://ctftime.org/api/v1/events/?limit=%d", *limit)
+			return fmt.Sprintf("https://ctftime.org/api/v1/events/?limit=%s", *limit)
 		} else {
 			return "https://ctftime.org/api/v1/events/"
 		}
@@ -39,7 +39,7 @@ func UpcomingEvents(limit *uint) ([]Event, error) {
 }
 
 func TeamInfo(teamID string) (Team, error) {
-	url := fmt.Sprintf("https://ctftime.org/api/v1/teams/%d/", teamID)
+	url := fmt.Sprintf("https://ctftime.org/api/v1/teams/%s/", teamID)
 	body, err := GETRequest(url)
 	if err != nil {
 		return Team{}, err

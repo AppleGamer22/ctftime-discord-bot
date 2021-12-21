@@ -16,26 +16,30 @@ func init() {
 	var err error
 	err = godotenv.Load(".env")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		os.Exit(1)
 	}
 	session, err = discordgo.New(os.Getenv("TOKEN"))
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		os.Exit(1)
 	}
-	_, err = session.ApplicationCommandCreate(os.Getenv("APP_ID"), "", bot.TeamCommand)
-	if err != nil {
-		log.Fatal(err)
-	}
-	session.AddHandler(bot.TeamCommandHandler)
 }
 
 func main() {
 	err := session.Open()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return
 	}
 	defer session.Close()
 	log.Println("Connected to Discord!")
+	_, err = session.ApplicationCommandCreate(os.Getenv("APP_ID"), "", bot.TeamCommand)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	session.AddHandler(bot.TeamCommandHandler)
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
