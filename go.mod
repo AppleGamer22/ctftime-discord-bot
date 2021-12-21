@@ -1,3 +1,3 @@
-module github.com/monsec/ctftime-discord-bot
+module github.com/MonSec/ctftime-discord-bot
 
 go 1.17
