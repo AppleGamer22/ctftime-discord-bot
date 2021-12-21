@@ -20,7 +20,7 @@ var TeamCommand = &discordgo.ApplicationCommand{
 				},
 				{
 					Name:  "MISC",
-					Value: "109523",
+					Value: "34111", //109523
 				},
 			},
 		},
