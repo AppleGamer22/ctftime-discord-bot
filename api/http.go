@@ -38,7 +38,7 @@ func UpcomingEvents(limit *uint) ([]Event, error) {
 	return events, err
 }
 
-func TeamInfo(teamID uint) (Team, error) {
+func TeamInfo(teamID string) (Team, error) {
 	url := fmt.Sprintf("https://ctftime.org/api/v1/teams/%d/", teamID)
 	body, err := GETRequest(url)
 	if err != nil {
