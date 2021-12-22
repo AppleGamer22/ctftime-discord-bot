@@ -24,6 +24,10 @@ var TeamCommand = &discordgo.ApplicationCommand{
 					// Value: "34111",
 					Value: "109523",
 				},
+				{
+					Name:  "RISC",
+					Value: "1510",
+				},
 			},
 		},
 	},

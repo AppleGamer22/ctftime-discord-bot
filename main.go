@@ -34,25 +34,16 @@ func main() {
 	}
 	defer session.Close()
 	log.Println("Connected to Discord!")
-	_, err = session.ApplicationCommandCreate(os.Getenv("APP_ID"), "", bot.TeamCommand)
+	_, _ = session.ApplicationCommandBulkOverwrite(os.Getenv("APP_ID"), "", []*discordgo.ApplicationCommand{})
+	_, err = session.ApplicationCommandBulkOverwrite(os.Getenv("APP_ID"), os.Getenv("GUILD_ID"), []*discordgo.ApplicationCommand{bot.TeamCommand})
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	session.AddHandler(bot.TeamCommandHandler)
+	session.AddHandler(bot.CommandHandler)
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
 	log.Println("Shutting down..")
-	// var monsec, err = api.TeamInfo("34111")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("%+v\n", monsec)
-	// upcomingEvents, err := api.UpcomingEvents(nil)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("%+v\n", upcomingEvents)
 
 }
